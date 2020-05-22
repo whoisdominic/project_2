@@ -10,15 +10,27 @@ class Index extends React.Component {
                 <NavComp>              
                 </NavComp>
 
+            <div className="main-cont">
+                
+                
+                
 
-                <h3 className="test">Is this below the nav?</h3>
 
 
-
-
+            </div>
             </Template> 
         )
     }
 }
+
+/////////////////////////////////////////////////
+/*
+Adds the current top 100 || 10 to the dom    
+
+
+
+
+*/
+
 
 module.exports = Index;

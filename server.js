@@ -7,6 +7,9 @@ const mongoose = require ('mongoose');
 const app = express ();
 const db = mongoose.connection;
 
+const axios = require('axios').default;
+
+
 //___________________
 //Port
 //___________________
@@ -56,12 +59,30 @@ app.get('/' , (req, res) => {
 // API PRACTICE
 //////////////////////////
 
+// console.log(axios);\
+// get
+const apiTest = () => {
+	axios.get("https://jsonplaceholder.typicode.com/users")
+	.then((res) => {
+		console.log(res.data)})
+		.catch((err) => {console.log(err)})
+		.then(() => {console.log('wtf')})
+}
 
 
-
-
-
-
+const pullSpotify = () => {
+	axios.get("https://api.spotify.com")
+	.then((res) => {
+		console.log(res.data);
+	})
+	.catch((err) => {
+		console.log(err);
+	})
+	.then(() => {
+		console.log('wtf');
+	})
+}
+pullSpotify()
 
 
 

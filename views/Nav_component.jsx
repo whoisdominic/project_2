@@ -24,15 +24,15 @@ const NavComp = (props) => {
                 </a>
 
                     <a href="/account">
-                        <input className="nav-btn" type="button" value="Account"/>
+                        <input className="nav-btn btn-secondary" type="button" value="Account"/>
                     </a>
                     <span></span>
                     <a href="#">
-                        <input className="nav-btn" type="button" value="Register"/>
+                        <input className="nav-btn btn-secondary" type="button" value="Register"/>
                     </a>
                     <span></span>
                     <a href="#">
-                        <input className="nav-btn" type="button" value="Login"/>
+                        <input className="nav-btn btn-secondary" type="button" value="Login"/>
                     </a>
                     <span></span>
                 </ul>
