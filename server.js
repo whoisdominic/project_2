@@ -9,6 +9,14 @@ const db = mongoose.connection;
 
 const axios = require('axios').default;
 
+//////////////////////////
+// Controllers
+//////////////////////////
+
+// const searchPlayer = require('./controllers/api_controllers.js')
+
+
+
 
 //___________________
 //Port
@@ -45,46 +53,65 @@ app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
 
 
+//////////////////////////
+// API
+//////////////////////////
+
+
+//////////////////////////
+// Player Search
+//////////////////////////
+
+const searchPlayer = (playerName, res) => {
+
+	axios({
+		"method":"GET",
+    "url":`https://api-football-v1.p.rapidapi.com/v2/players/search/${playerName}`,
+    "headers":{
+			"content-type":"application/octet-stream",
+			"x-rapidapi-host":"api-football-v1.p.rapidapi.com",
+			"x-rapidapi-key":"91433b6e49mshc9a6cf39118d641p12ab91jsndc6959b50f40",
+			"useQueryString":true
+    }
+	})
+	.then((response)=>{
+				res.render('Search', {
+					results: response.data.api.players
+				})
+	})
+	.catch((error)=>{
+        console.log(error)
+	})
+	
+}
 
 //___________________
 // Routes
 //___________________
-//localhost:3000 
 app.get('/' , (req, res) => {
   res.render('Index');
 });
+
+
+app.get(`/search/:searchParam`, (req, res) => {
+	searchPlayer(req.params.searchParam, res)
+})
+
 
 
 //////////////////////////
 // API PRACTICE
 //////////////////////////
 
-// console.log(axios);\
-// get
-const apiTest = () => {
-	axios.get("https://jsonplaceholder.typicode.com/users")
-	.then((res) => {
-		console.log(res.data)})
-		.catch((err) => {console.log(err)})
-		.then(() => {console.log('wtf')})
-}
-
-
-const pullSpotify = () => {
-	axios.get("https://api.spotify.com")
-	.then((res) => {
-		console.log(res.data);
-	})
-	.catch((err) => {
-		console.log(err);
-	})
-	.then(() => {
-		console.log('wtf');
-	})
-}
-pullSpotify()
-
-
+// // console.log(axios);\
+// // get
+// const apiTest = () => {
+// 	axios.get("https://jsonplaceholder.typicode.com/users")
+// 	.then((res) => {
+// 		console.log(res.data)})
+// 		.catch((err) => {console.log(err)})
+// 		.then(() => {console.log('wtf')})
+// }
 
 
 //////////////////////////
