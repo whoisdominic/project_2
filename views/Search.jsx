@@ -22,7 +22,7 @@ class Search extends React.Component {
 
                 {results.map((item, i) => {
                     return (
-                        <div>
+                        <div className="">
 
                         <h1>hey</h1>
                     <ul>    

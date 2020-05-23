@@ -1,12 +1,42 @@
 const React = require('react');
 
 const NavComp = (props) => {
-    return (
+  	return (
         <>
+{/*           
+        <nav>
+    			<div class="nav-wrapper  deep-purple lighten-4">
+      			<ul class="left hide-on-med-and-down">
+        			<li><a href="#">Top Ten</a></li>
+        			<li><a href="#">My Votes</a></li>
+        			<li><a href="#">Account</a></li>
+        			<li><a href="#">Login</a></li>
+        			<li><a href="#">Sign up</a></li>
+        			<li class="active"><a href="collapsible.html">Search</a></li>
+            </ul>
+          </div>
+        </nav> */}
+				<nav>
+    <div class="nav-wrapper white">
+					<a href="/">
+							<img  className="navcomp-img brand logo" src="/img/goat-logo-trans.png" alt="Goat Ranker Logo"/>
+					</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+
+
+      			<li className="deep-purple lighten-3"><a href="/">Top Ten</a></li>
+      			<li className="deep-purple lighten-3"><a href="/">My Votes</a></li>
+      			<li className="deep-purple lighten-3"><a href="/">Account</a></li>
+      			<li className="deep-purple lighten-3"><a href="/">Login</a></li>
+      			<li className="deep-purple lighten-3"><a href="/">Sign up</a></li>
+      			<li className="active deep-purple lighten-2"><a href="collapsible.html">Search</a></li>
+      </ul>
+    </div>
+  		</nav>
+{/*           
+          
             <nav className="navcomp-cont" >
-                <a href="/">
-                    <img  className="navcomp-img" src="GoatRankerbanner.png" alt="Goat Ranker Logo"/>
-                </a>
                 
                 <div className="links-cont">
                 <ul className="navcomp-ul">
@@ -37,7 +67,7 @@ const NavComp = (props) => {
                     <span></span>
                 </ul>
                 </div>
-            </nav>
+            </nav> */}
         </>
     )
 }
