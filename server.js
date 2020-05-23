@@ -75,7 +75,7 @@ const searchPlayer = (playerName, res) => {
     }
 	})
 	.then((response)=>{
-				res.render('Search', {
+				res.render('SearchRes', {
 					results: response.data.api.players
 				})
 	})
@@ -85,6 +85,35 @@ const searchPlayer = (playerName, res) => {
 	
 }
 
+//////////////////////////
+// Spotify
+//////////////////////////
+
+var SpotifyWebApi = require('spotify-web-api-node');
+
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId: '32995d0523ec4bb39a2e39d2fa56ac35',
+  clientSecret: '490e51713f024d43b9773eaf68334484',
+  redirectUri: 'http://localhost:3000/callback'
+});
+
+spotifyApi.setAccessToken('BQDj-iCjBmREO_bQdsiBnEpsygsrRkrETLFkWmuhUoO1JoNtDt7bN3Rl2fTRnHBKLE7XhVPgjdl7cb5MBTqEMAbYMTCYO4oomadMA9i4fTFoo7LHv4HnscIAdb2wNou7Ztz3RqhWL8MB7_fS6j7OEzEu8p_UPfrLPrL1_GD2fWmFk43qv_LqZQ');
+
+
+// Get Elvis' albums
+spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
+  function(data) {
+    console.log('Artist albums', data.body);
+  },
+  function(err) {
+    console.error(err);
+  }
+);
+
+
+
+
 //___________________
 // Routes
 //___________________
@@ -93,11 +122,17 @@ app.get('/' , (req, res) => {
 });
 
 
+app.get('/search', (req, res) => {
+	res.render('Search')
+})
+
 app.get(`/search/:searchParam`, (req, res) => {
 	searchPlayer(req.params.searchParam, res)
 })
 
+app.get('/spotify', (req, res) => {
 
+})
 
 //////////////////////////
 // API PRACTICE

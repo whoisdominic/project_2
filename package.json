@@ -21,6 +21,7 @@
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
     "react-views": "^1.0.4",
-    "styled-css-grid": "^1.2.1"
+    "spotify-web-api-js": "^1.4.0",
+    "spotify-web-api-node": "^4.0.0"
   }
 }

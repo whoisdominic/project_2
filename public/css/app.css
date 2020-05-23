@@ -38,3 +38,6 @@ body {
 span {
     margin: 0px 1rem
 }
+#hide {
+    display: none;
+}
