@@ -98,18 +98,19 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: 'http://localhost:3000/callback'
 });
 
-spotifyApi.setAccessToken('BQDj-iCjBmREO_bQdsiBnEpsygsrRkrETLFkWmuhUoO1JoNtDt7bN3Rl2fTRnHBKLE7XhVPgjdl7cb5MBTqEMAbYMTCYO4oomadMA9i4fTFoo7LHv4HnscIAdb2wNou7Ztz3RqhWL8MB7_fS6j7OEzEu8p_UPfrLPrL1_GD2fWmFk43qv_LqZQ');
+spotifyApi.setAccessToken('BQBViB7Phwmtclpbm0wf2ywU-fxgZLQyKeDqsaeL4gowGvTY49MsbJEG8SR4FEf9pcsQ6W4B1kbr-yXcozlS33mV9mCUF2iQkN_1_OkZQpZ1llVlhfQ-WOLT40LikcyWhcVDj2FJZ2Lb4-wykI3P9T9votHT3DVEa4j8bTG2qFOaVkUOLsbleQ');
 
+// spotifyApi.refreshAccessToken('AQAfDTYxt12L-k0PE7AREMOQ2iHC36kdwI7LNu3vaNHSMZnA_SeZmbQSVaoG5FhOmOjDGkUnmH3eR5KwGow7M-rUMlO6j_F32qpDxG59dBdIDp59VXTVV6Bma55_lbZfEiA')
 
-// Get Elvis' albums
-spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(
-  function(data) {
-    console.log('Artist albums', data.body);
-  },
-  function(err) {
-    console.error(err);
-  }
-);
+// spotifyApi.searchArtists('Drake')
+//   .then(function(data) {
+//     console.log('Search artists by "Love"', data.body);
+//   }, function(err) {
+//     console.error(err);
+//   });
+
+http://localhost:8888/#&refresh_token=AQBqa7oppqO6PZWI99D1LrS9oP07zs5tnj5gCxa4AEPgdEplQ36N7IS08y9Gv5ynCsv1zgO3T9Oektxda-uOeQOhXj42oJBg8chWdeDKIN3L1_qLKgST1RxdGw740_x1aYk
+
 
 
 
@@ -122,16 +123,32 @@ app.get('/' , (req, res) => {
 });
 
 
+app.get(`/search/:searchParam`, (req, res) => {
+	
+	spotifyApi.searchArtists(req.params.searchParam)
+	.then(function(data) {
+		console.log(`Search artists by "${req.params.searchParam}"`, data.body);
+		res.render('SearchRes', {
+			results: data.body,
+			search: req.params.searchParam
+		})
+	}, function(err) {
+		console.error(err);
+	});
+
+})
+
 app.get('/search', (req, res) => {
 	res.render('Search')
 })
 
-app.get(`/search/:searchParam`, (req, res) => {
-	searchPlayer(req.params.searchParam, res)
-})
-
 app.get('/spotify', (req, res) => {
 
+})
+
+app.post('/search', (req, res) => {	
+	console.log(req.body);
+	res.redirect(`/search/${req.body.search}`)
 })
 
 //////////////////////////

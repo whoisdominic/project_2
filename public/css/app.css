@@ -41,3 +41,7 @@ span {
 #hide {
     display: none;
 }
+#cheese {
+    width: 300px;
+    height: auto;
+}

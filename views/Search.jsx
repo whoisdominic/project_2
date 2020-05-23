@@ -8,10 +8,21 @@ class Index extends React.Component {
         const { datadata } = this.props
         return (
             <Template>
-				<NavComp>
-                    
-                </NavComp>
-				
+							<NavComp>        
+              </NavComp>
+
+							<div className="main-cont">
+                
+                
+                
+				<form action="/search" method="POST">
+					<input type="search" name="search"/>
+					<input type="submit" value="Search"/>
+        </form>
+
+
+
+								</div>
 
             </Template> 
         )
