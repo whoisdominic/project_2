@@ -29,7 +29,7 @@ class SearchRes extends React.Component {
                     <div class="col s12 m6">
                       <div class="card ">
                         <div class="card-image">
-                          <img id="cheese" src={`${artist.images[0].url}`} />
+                          <img src={`${artist.images[0].url}`} />
                           <span class="card-title">{artist.name}</span>
                           <a class="popular btn-floating halfway-fab waves-effect waves-light deep-purple lighten-5">
                             <i class="material-icons popular deep-purple lighten-1">

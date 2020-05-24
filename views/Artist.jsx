@@ -19,8 +19,16 @@ class Artist extends React.Component {
               {results.genres.map((genre, i) => {
                 return (
                   <li>
-                    {" "}
-                    <a href="">{genre}</a>
+                    <form action={`/categories/${genre}`} method="post">
+                      <input name="name" type="hidden" value={genre} />
+                      <input name="artistId" type="hidden" value={id} />
+                      <input
+                        name="user_id"
+                        type="hidden"
+                        value={`should be user's id`}
+                      />
+                      <input class="btn" value={genre} type="submit" />
+                    </form>
                   </li>
                 );
               })}

@@ -11,10 +11,10 @@ const accountSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     email: {
-        type: Date,
+        type: String,
         required: true,
         unique: false
     },
@@ -28,6 +28,11 @@ const accountSchema = new Schema({
         required: true,
         unique: false
     },
+    votes: [{
+        category: String,
+        voted: Boolean,
+        artistId: String
+    }]
 }, {
     timestamps: true
 });
