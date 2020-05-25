@@ -85,7 +85,7 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQBa67E8dzqeBcNs44A8-UYNfGBJi7VoTSo9HMSog5XciHxLJanBlHI3QAL9eTXdAcLCfv4_gwAimEbVq2ry4Oj_hVvdK7KSTUXKiNv8koQ3giEdG1irI8PEe6WjlOX_tmO7X3y1--reqKAuDnY9r_2JVbms1BWt42s-eokV-BdS3csRozBB4g"
+  "BQDjrNR75OiazFh8-9FG2hBDK80BzspLkzJFO7CptavfnrkOrQ34k-tdmKyadfJ4MWwihHRuN85hEeMoknEtcwsz2hEML5S3-vrBQH-1HVah6fVF9qKpVkQvNQ5t0aTrg9bb6JNnQQtsgqhgRJbBnc6Uaxcdyh9kWuXfEsqari1MJvxnNM_ahg"
 );
 
 spotifyApi.setRefreshToken(
@@ -174,7 +174,7 @@ app.get("/artist/:id", (req, res) => {
         if (foundArtist.length === 1) {
           console.log(`${foundArtist[0].name} already exists in GOAT DB`);
         } else {
-          console.log('wtf is going on');
+          console.log('Creating Artist in our database');
           Artist.create({
             name: data.body.name,
             spotifyId: data.body.id,
@@ -223,28 +223,18 @@ app.get('/categories/:genre', (req, res) => {
     name: `${req.params.genre}`
   }, (err, genre) => {
     // console.log(genre);
-
+    let display = ranker(genre, 1)
+    // console.log('hey', display[0].id);
     Artist.find({
-      artistId: ranker(genre, 1)
+      spotifyId: display[0].id
     }, (err, goat) => {
-      // console.log(genre);
-
-
+      // console.log(`the goat is ${goat}`);
       res.render('Category', {
         data: genre,
         result: goat,
         category: req.params.genre
       })
-
-
-
-
     })
-
-
-
-
-
   })
 })
 

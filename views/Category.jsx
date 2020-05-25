@@ -7,14 +7,14 @@ class Category extends React.Component {
     const { result, data, category } = this.props;
     // const goats = ranker(data, 5);
     // console.log("The nominies are!", goats);
-    console.log(result);
+    console.log();
     return (
       <Template>
         <NavComp></NavComp>
         <div className="main-cont">
-          <h2>{category}</h2>
-          <div className="main-cont">
-            {/* <img src={result.images[0].url} alt="" /> */}
+          <h2 className="cat-title">{category}</h2>
+          <div className="main-cont goat-display">
+            <img className="goat-photo" src={result[0].images[0].url} alt="" />
           </div>
           <ul>
             <li></li>

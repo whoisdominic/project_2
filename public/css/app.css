@@ -119,3 +119,14 @@ span {
 .index-wrapper {
     background-color: black;
 }
+
+.cat-title {
+    font-size: 6rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.goat-photo {
+    max-height: 60%;
+    width: auto;
+}
