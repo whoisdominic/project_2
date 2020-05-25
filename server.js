@@ -85,31 +85,32 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQA46ZexI8OJaQIoxZF8NtqRdvc-Qv_swAW4l-1buDs67jaVo-tJctfYEHU91aWyROwPB8107CNqNeqgE_bjSoJij5V_I34Q-ylOFGihIfJbLveHT6P6B0bCXNN2wpg18E92Ovr8R9F64DxZw8jJ3Nso83BD7JOZQcf7iTOgd3uqPkb0Vn-_Gw"
+  "BQAg5aMUmL6-092mhnSak61brl582Z7ayv5EpZGlIK70Iz9CRWlSzs831c0YZIPaUgvbf5v9W8sLHnlSXI8mZgcH-BVNZLzySV0LJb7ktYliVMZkihKTHxZIx81viQJq1PQAV6YtzJk_V9ilvKAGp1VTYRC-rmr96Q-pJ-gk9RQinEXbC_Zdlg"
 );
 
 spotifyApi.setRefreshToken(
-  "AQBuYNZYJtB5s6P8ZyD0iIQENlrpJn-yVvCFMVWhW_urlA_RYxb5qT13FTBGC4SWyqWwihAyfEeSz3PvhNi4f8VkzoPJmkSoIksz70gUBd2ksdh62U1Zu3DkUXXuBevSB50"
+  "AQBBd2Mo2gcQvbpr0MyKnPih0Eqp1iV7_3JgnLGWP3-b0ERTh1kXU3TL-cNPy5rwvDxfPz3jDsgor4ucv6jCKKmc5iiXaB1E3yeQ4cxgxyJUM1DmdMIHR7QJKvxPZAM97ms"
 );
 
-//////////////////////////
-// Test area
-//////////////////////////
+http: //localhost:8888/#access_token=&refresh_token=
+  //////////////////////////
+  // Test area
+  //////////////////////////
 
-// spotifyApi.getArtist('3TVXtAsR1Inumwj472S9r4')
-// .then(function(data) {
-// 	console.log('Artist information', data.body);
-// }, function(err) {
-//   console.error(err);
-// });
+  // spotifyApi.getArtist('3TVXtAsR1Inumwj472S9r4')
+  // .then(function(data) {
+  // 	console.log('Artist information', data.body);
+  // }, function(err) {
+  //   console.error(err);
+  // });
 
-//////////////////////////
-// Routes
-//////////////////////////
+  //////////////////////////
+  // Routes
+  //////////////////////////
 
-app.get("/", (req, res) => {
-  res.render("Index");
-});
+  app.get("/", (req, res) => {
+    res.render("Index");
+  });
 
 //////////////////////////
 // User Routes
@@ -194,14 +195,12 @@ app.get('/categories/:genre', (req, res) => {
   Category.find({
     name: `${req.params.genre}`
   }, (err, genre) => {
-    console.log(genre);
+    // console.log(genre);
     res.render('Category', {
-
+      data: genre,
+      category: req.params.genre
     })
   })
-
-
-
 })
 
 
