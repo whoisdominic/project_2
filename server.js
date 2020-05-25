@@ -6,7 +6,7 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const app = express();
 const db = mongoose.connection;
-
+const ranker = require("./controllers/ranker.js");
 const axios = require("axios").default;
 
 //////////////////////////
@@ -85,32 +85,27 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQAg5aMUmL6-092mhnSak61brl582Z7ayv5EpZGlIK70Iz9CRWlSzs831c0YZIPaUgvbf5v9W8sLHnlSXI8mZgcH-BVNZLzySV0LJb7ktYliVMZkihKTHxZIx81viQJq1PQAV6YtzJk_V9ilvKAGp1VTYRC-rmr96Q-pJ-gk9RQinEXbC_Zdlg"
+  "BQBa67E8dzqeBcNs44A8-UYNfGBJi7VoTSo9HMSog5XciHxLJanBlHI3QAL9eTXdAcLCfv4_gwAimEbVq2ry4Oj_hVvdK7KSTUXKiNv8koQ3giEdG1irI8PEe6WjlOX_tmO7X3y1--reqKAuDnY9r_2JVbms1BWt42s-eokV-BdS3csRozBB4g"
 );
 
 spotifyApi.setRefreshToken(
-  "AQBBd2Mo2gcQvbpr0MyKnPih0Eqp1iV7_3JgnLGWP3-b0ERTh1kXU3TL-cNPy5rwvDxfPz3jDsgor4ucv6jCKKmc5iiXaB1E3yeQ4cxgxyJUM1DmdMIHR7QJKvxPZAM97ms"
+  "AQBQ82Hh-z_1YkvBG74mTjt-TT8GHy3reNHbX7GYyIIxkNE6LbOeDx-UzZeHCZmnAfNACrkHaBU9qad41fTcKgR0Z_mpnG6v2MZE0mORGqs8yraw4UFR_QaizXkB5Zt773Y"
 );
 
-http: //localhost:8888/#access_token=&refresh_token=
-  //////////////////////////
-  // Test area
-  //////////////////////////
 
-  // spotifyApi.getArtist('3TVXtAsR1Inumwj472S9r4')
-  // .then(function(data) {
-  // 	console.log('Artist information', data.body);
-  // }, function(err) {
-  //   console.error(err);
-  // });
 
-  //////////////////////////
-  // Routes
-  //////////////////////////
+//////////////////////////
+// Refresh area
+//////////////////////////
 
-  app.get("/", (req, res) => {
-    res.render("Index");
-  });
+
+//////////////////////////
+// Routes
+//////////////////////////
+
+app.get("/", (req, res) => {
+  res.render("Index");
+});
 
 //////////////////////////
 // User Routes
@@ -156,6 +151,12 @@ app.post("/search", (req, res) => {
   console.log(req.body);
   res.redirect(`/search/${req.body.search}`);
 });
+
+
+
+
+
+
 //////////////////////////
 // Artist Show
 //////////////////////////
@@ -164,11 +165,36 @@ app.post("/search", (req, res) => {
 app.get("/artist/:id", (req, res) => {
   spotifyApi.getArtist(req.params.id).then(
     function (data) {
-      console.log("Artist information", data.body);
+      // console.log("Artist information", data.body);
+
+
+      Artist.find({
+        spotifyId: data.body.id
+      }, (err, foundArtist) => {
+        if (foundArtist.length === 1) {
+          console.log(`${foundArtist[0].name} already exists in GOAT DB`);
+        } else {
+          console.log('wtf is going on');
+          Artist.create({
+            name: data.body.name,
+            spotifyId: data.body.id,
+            images: data.body.images,
+            popularity: data.body.popularity,
+            genres: data.body.genres,
+            followers: data.body.followers.total
+
+          }, (err, createdArtist) => {
+            console.log(createdArtist);
+            if (err) {
+              console.log(err)
+            }
+          })
+        }
+      })
 
       spotifyApi.getArtistTopTracks(req.params.id, "GB").then(
         function (dataTracks) {
-          console.log("server tracks ", dataTracks.body);
+          // console.log("server tracks ", dataTracks.body);
 
           res.render("Artist", {
             tracks: dataTracks.body,
@@ -187,6 +213,7 @@ app.get("/artist/:id", (req, res) => {
   );
 });
 
+
 //////////////////////////
 // Categories
 //////////////////////////
@@ -196,10 +223,28 @@ app.get('/categories/:genre', (req, res) => {
     name: `${req.params.genre}`
   }, (err, genre) => {
     // console.log(genre);
-    res.render('Category', {
-      data: genre,
-      category: req.params.genre
+
+    Artist.find({
+      artistId: ranker(genre, 1)
+    }, (err, goat) => {
+      // console.log(genre);
+
+
+      res.render('Category', {
+        data: genre,
+        result: goat,
+        category: req.params.genre
+      })
+
+
+
+
     })
+
+
+
+
+
   })
 })
 

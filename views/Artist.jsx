@@ -5,7 +5,7 @@ const NavComp = require("./Nav_component");
 class Artist extends React.Component {
   render() {
     const { results, id, tracks } = this.props;
-    console.log("these are the top tracks: ", tracks);
+    // console.log("these are the top tracks: ", tracks);
     return (
       <Template>
         <NavComp></NavComp>

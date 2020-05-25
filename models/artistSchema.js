@@ -10,7 +10,7 @@ const artistSchema = new Schema({
     },
     albums: {
         type: String,
-        required: true,
+        required: false,
     },
     genres: [{
         type: String,

@@ -1,24 +1,20 @@
 const React = require("react");
 const Template = require("./Template.jsx");
 const NavComp = require("./Nav_component");
-const ranker = require("../controllers/ranker.js");
 
 class Category extends React.Component {
   render() {
-    const { data, category } = this.props;
-    const goats = ranker(data, 5);
-    console.log("The nominies are!", goats);
+    const { result, data, category } = this.props;
+    // const goats = ranker(data, 5);
+    // console.log("The nominies are!", goats);
+    console.log(result);
     return (
       <Template>
         <NavComp></NavComp>
         <div className="main-cont">
           <h2>{category}</h2>
           <div className="main-cont">
-            <ul>
-              {data.map((item, i) => {
-                return <li>{item.userVotes[0].artistId}</li>;
-              })}
-            </ul>
+            {/* <img src={result.images[0].url} alt="" /> */}
           </div>
           <ul>
             <li></li>
