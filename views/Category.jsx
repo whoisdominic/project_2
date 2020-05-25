@@ -4,7 +4,7 @@ const NavComp = require("./Nav_component");
 
 class Category extends React.Component {
   render() {
-    const { result, data, category } = this.props;
+    const { goatRank, result, data, category } = this.props;
     // const goats = ranker(data, 5);
     // console.log("The nominies are!", goats);
     console.log();
@@ -13,8 +13,21 @@ class Category extends React.Component {
         <NavComp></NavComp>
         <div className="main-cont">
           <h2 className="cat-title">{category}</h2>
-          <div className="main-cont goat-display">
-            <img className="goat-photo" src={result[0].images[0].url} alt="" />
+          <div className="main-cont">
+            <div className="goat-display">
+              <img
+                className="goat-photo"
+                src={result[0].images[0].url}
+                alt=""
+              />
+              <div className="goat-stats">
+                <ul>
+                  <li className="goat-item">{`Goat Rank: ${goatRank}`}</li>
+                  <li className="goat-item">{`Spotify Popularity: ${result[0].popularity}`}</li>
+                  <li className="goat-item">{`Spotify Followers: ${result[0].followers}`}</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <ul>
             <li></li>

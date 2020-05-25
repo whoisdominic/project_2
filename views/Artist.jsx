@@ -11,30 +11,36 @@ class Artist extends React.Component {
         <NavComp></NavComp>
         <div className="main-cont">
           <div className="show-wrapper">
-            <h1>{results.name}</h1>
+            <div className="stats-cont">
+              <h1>{results.name}</h1>
+              <h3 className="btn light-blue lighten-1">Vote Below</h3>
+              <ul>
+                {results.genres.map((genre, i) => {
+                  return (
+                    <li>
+                      <form action={`/categories/${genre}`} method="post">
+                        <input name="name" type="hidden" value={genre} />
+                        <input name="artistId" type="hidden" value={id} />
+                        <input
+                          name="user_id"
+                          type="hidden"
+                          value={`should be user's id`}
+                        />
+                        <input
+                          className="btn deep-purple lighten-1"
+                          value={genre}
+                          type="submit"
+                        />
+                      </form>
+                    </li>
+                  );
+                })}
+                <br />
+                <li>Popularity: {results.popularity}</li>
+                <li>Spotify Followers: {results.followers.total}</li>
+              </ul>
+            </div>
             <img src={results.images[0].url} alt="" />
-          </div>
-          <div className="stats-cont">
-            <ul>
-              {results.genres.map((genre, i) => {
-                return (
-                  <li>
-                    <form action={`/categories/${genre}`} method="post">
-                      <input name="name" type="hidden" value={genre} />
-                      <input name="artistId" type="hidden" value={id} />
-                      <input
-                        name="user_id"
-                        type="hidden"
-                        value={`should be user's id`}
-                      />
-                      <input class="btn" value={genre} type="submit" />
-                    </form>
-                  </li>
-                );
-              })}
-              <li>Popularity: {results.popularity}</li>
-              <li>Spotify Followers: {results.followers.total}</li>
-            </ul>
           </div>
         </div>
       </Template>

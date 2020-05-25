@@ -129,4 +129,18 @@ span {
 .goat-photo {
     max-height: 60%;
     width: auto;
+    border-radius: 1%;
+}
+
+.goat-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goat-stats {
+    font-size: 4rem;
+    margin-left: 3rem;
+    padding: 1rem;
+    min-width: 60%;
 }

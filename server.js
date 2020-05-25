@@ -85,7 +85,7 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQDjrNR75OiazFh8-9FG2hBDK80BzspLkzJFO7CptavfnrkOrQ34k-tdmKyadfJ4MWwihHRuN85hEeMoknEtcwsz2hEML5S3-vrBQH-1HVah6fVF9qKpVkQvNQ5t0aTrg9bb6JNnQQtsgqhgRJbBnc6Uaxcdyh9kWuXfEsqari1MJvxnNM_ahg"
+  "BQB_U8B2TmScKVj7HVNE0f_zs_lH8bVWUVYlY15vCiScVfSUNFrcI5KHN3RStJTWKQ2iI63C5T8SyHf6qlS8zyVh_8PLVpdnYbBSFvtBxZjkpmQgemMvRqf4FC3c7PJ7yKHF04Cs24I_ZVqldKVDdve2Wmi_akj0wB402UqpqXJmklgnyODMkg"
 );
 
 spotifyApi.setRefreshToken(
@@ -145,7 +145,6 @@ app.get("/search", (req, res) => {
   res.render("Search");
 });
 
-app.get("/spotify", (req, res) => {});
 
 app.post("/search", (req, res) => {
   console.log(req.body);
@@ -173,6 +172,9 @@ app.get("/artist/:id", (req, res) => {
       }, (err, foundArtist) => {
         if (foundArtist.length === 1) {
           console.log(`${foundArtist[0].name} already exists in GOAT DB`);
+          // need to add update in here
+          // find and update using the foundArtist variable
+          // push data massaged into the shema
         } else {
           console.log('Creating Artist in our database');
           Artist.create({
@@ -224,12 +226,13 @@ app.get('/categories/:genre', (req, res) => {
   }, (err, genre) => {
     // console.log(genre);
     let display = ranker(genre, 1)
-    // console.log('hey', display[0].id);
+    console.log('hey', display[0]);
     Artist.find({
       spotifyId: display[0].id
     }, (err, goat) => {
       // console.log(`the goat is ${goat}`);
       res.render('Category', {
+        goatRank: display[0].rank,
         data: genre,
         result: goat,
         category: req.params.genre
