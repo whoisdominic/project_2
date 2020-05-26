@@ -95,7 +95,7 @@ users.post("/", (req, res) => {
 users.delete('/', (req, res) => {
     console.log('User is logged out');
     req.session.destroy(() => {
-        res.redirect('/user/signup');
+        res.redirect('/');
     });
 });
 

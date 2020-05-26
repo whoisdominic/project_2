@@ -5,8 +5,8 @@ const addCommas = require("../controllers/commas.js");
 
 class Artist extends React.Component {
   render() {
-    const { results, id, tracks } = this.props;
-
+    const { results, id, tracks, currentUser } = this.props;
+    console.log("HEY", currentUser);
     // console.log("these are the top tracks: ", tracks);
     return (
       <Template>
@@ -29,7 +29,7 @@ class Artist extends React.Component {
                         <input
                           name="user_id"
                           type="hidden"
-                          value={`should be user's id`}
+                          value={currentUser._id}
                         />
                         <input
                           className="btn deep-purple lighten-1"

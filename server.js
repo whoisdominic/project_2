@@ -109,7 +109,7 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQAhkdDrreRhYYnFPZW25f6oEQeWOhFoyBahZJGK3vPwy0U78SKu-WqGGh1_Sx0JWArXzLNBLs3Y3HD6ajzEu-5slL9eqXfaO5GFUBJzt_lkQTY5qaE6RkfzUBMyObb10VWyJMU0LAuY4-YMi2AdPtY-9AezmXm_snMvwUWXIys8A8XVMe_8tQ"
+  "BQAo2lYKLTkq-wGTxnYugQ2_BkoxGVSbowfYgC4zAgWsJDMGsy_dzZ3TfNKXNWxq6Xwdj4ZuWM7njSRIowVWk9zGCBVtinGJRoJ9odQZHd11SfaplBwQcJA6BFagrzhzAUmA8exHO9KSYCvzSdRNh3xz7dz3BgZTTAk_ePJaSYDDOREpP1Cxjg"
 );
 
 spotifyApi.setRefreshToken(
@@ -195,11 +195,22 @@ app.get("/artist/:id", (req, res) => {
         function (dataTracks) {
           // console.log("server tracks ", dataTracks.body);
 
-          res.render("Artist", {
-            tracks: dataTracks.body,
-            results: data.body,
-            id: req.params.id,
-          });
+          User.findOne({
+            username: req.session.currentUser
+          }, (err, foundUser) => {
+            if (err) {
+              console.log(err);
+            } else {
+
+              res.render("Artist", {
+                tracks: dataTracks.body,
+                results: data.body,
+                id: req.params.id,
+                currentUser: foundUser
+
+              });
+            }
+          })
         },
         function (err) {
           console.log("Something went wrong!", err);
