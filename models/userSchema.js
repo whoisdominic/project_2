@@ -16,7 +16,7 @@ const accountSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: false
+        unique: true
     },
     firstName: {
         type: String,
@@ -37,5 +37,5 @@ const accountSchema = new Schema({
     timestamps: true
 });
 
-const Account = mongoose.model('Account', accountSchema);
+const Account = mongoose.model('Account1', accountSchema);
 module.exports = Account;

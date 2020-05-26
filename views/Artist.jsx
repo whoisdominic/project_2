@@ -29,7 +29,7 @@ class Artist extends React.Component {
                         <input
                           name="user_id"
                           type="hidden"
-                          value={currentUser._id}
+                          value={currentUser ? currentUser._id : "none"}
                         />
                         <input
                           className="btn deep-purple lighten-1"

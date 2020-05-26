@@ -9,13 +9,13 @@ nav dynamics:{
 }
 
 search bar {
-  
+
 }
 
 remember to attach users id to vote
 
 categories {
-
+shows two featured categories
 }
 
 extra:

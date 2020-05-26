@@ -109,7 +109,7 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQAo2lYKLTkq-wGTxnYugQ2_BkoxGVSbowfYgC4zAgWsJDMGsy_dzZ3TfNKXNWxq6Xwdj4ZuWM7njSRIowVWk9zGCBVtinGJRoJ9odQZHd11SfaplBwQcJA6BFagrzhzAUmA8exHO9KSYCvzSdRNh3xz7dz3BgZTTAk_ePJaSYDDOREpP1Cxjg"
+  "BQAgR_c4GkB0Ho6UTuLz08mgK9sCtZIcsTM_r1wmKC57WgXWrZe2dmxxb2_DyRdoi3WBYsb8eyQLvjaRWDpd69por8JmaioK60WARQxUqGZDzuEyyCy0TZ2PliWmgRJK6ItbP89qmspA8bJYMuT531TbGkpBSacbxjkiXpNZDRZymg_v4lszvQ"
 );
 
 spotifyApi.setRefreshToken(
@@ -272,7 +272,9 @@ app.post("/categories/:genre", authCheck, (req, res) => {
 });
 
 app.get("/categories", (req, res) => {
-  res.render("AllCategories");
+  res.render("AllCategories", {
+
+  });
 });
 
 //___________________

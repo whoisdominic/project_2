@@ -18,7 +18,7 @@ const NavComp = (props) => {
               <a href="/search">Search</a>
             </li>
             <li className="deep-purple lighten-3">
-              <a href="/">Categories</a>
+              <a href="/categories">Categories</a>
             </li>
             <li className="deep-purple lighten-3">
               <a href="/">My Votes</a>

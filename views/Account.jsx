@@ -20,8 +20,11 @@ class Account extends React.Component {
             </ul>
           </div>
           <br />
-          <a class="waves-effect waves-light btn-large">
-            <i class="material-icons left">edit</i>
+          <a
+            href="/user/account/edit"
+            className="waves-effect waves-light btn-large"
+          >
+            <i className="material-icons left">edit</i>
           </a>
         </div>
       </Template>

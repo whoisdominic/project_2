@@ -19,7 +19,6 @@ class Login extends React.Component {
                     type="text"
                     className="validate"
                   />
-                  <label for="user_name"></label>
                 </div>
               </div>
 
@@ -32,7 +31,6 @@ class Login extends React.Component {
                     type="password"
                     className="validate"
                   />
-                  <label for="password"></label>
                 </div>
               </div>
               <input className="btn submit" type="submit" value="Submit" />
