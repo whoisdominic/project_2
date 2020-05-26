@@ -9,10 +9,11 @@ class Login extends React.Component {
         <NavComp></NavComp>
         <div className="main-cont centered-cont">
           <div className="row">
-            <form className="col s12">
+            <form action="/user/login" method="POST" className="col s12">
               <div className="row">
                 <div className="input-field col s4">
                   <input
+                    name="username"
                     placeholder="Username"
                     id="user_name"
                     type="text"
@@ -25,6 +26,7 @@ class Login extends React.Component {
               <div className="row">
                 <div className="input-field col s4">
                   <input
+                    name="password"
                     placeholder="Password"
                     id="password"
                     type="password"
@@ -33,8 +35,15 @@ class Login extends React.Component {
                   <label for="password"></label>
                 </div>
               </div>
-              <input className="btn submit" type="button" value="Submit" />
+              <input className="btn submit" type="submit" value="Submit" />
             </form>
+            <br />
+            <br />
+            <div className="col s12">
+              <a href="/user/signup">
+                <h3>Don't have an account?</h3>
+              </a>
+            </div>
           </div>
         </div>
       </Template>

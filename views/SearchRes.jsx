@@ -12,43 +12,45 @@ class SearchRes extends React.Component {
         <NavComp></NavComp>
 
         <div className="main-cont">
-          <h1>Results for {`"${search}"`}</h1>
-
-          <div class="collection">
-            {results.artists.items.map((artist, i) => {
-              if (artist.images.length > 1) {
-                displayReady.push(artist);
-                // results.splice(i, 1)
-              }
-            })}
-            {displayReady.map((artist, i) => {
-              // console.log(artist.images[0].url)
-              return (
-                <a href={`/artist/${artist.id}`}>
-                  <div key={i} class="row">
-                    <div class="col s12 m6">
-                      <div class="card ">
-                        <div class="card-image">
-                          <img src={`${artist.images[0].url}`} />
-                          <span class="card-title">{artist.name}</span>
-                          <a class="popular btn-floating halfway-fab waves-effect waves-light deep-purple lighten-5">
-                            <i class="material-icons popular deep-purple lighten-1">
-                              {artist.popularity}
-                            </i>
-                          </a>
-                        </div>
-                        <div class="card-content">
-                          <ul>
-                            <li>{artist.name}</li>
-                            <li>{artist.images.length}</li>
-                          </ul>
+          <h1 className="results-search-title">Results for {`"${search}"`}</h1>
+          <div className="center-the-cont">
+            <div id="collection" class="collection">
+              {results.artists.items.map((artist, i) => {
+                if (artist.images.length > 1) {
+                  displayReady.push(artist);
+                  // results.splice(i, 1)
+                }
+              })}
+              {displayReady.map((artist, i) => {
+                // console.log(artist.images[0].url)
+                return (
+                  <a href={`/artist/${artist.id}`}>
+                    <div key={i} className="row">
+                      <div className="col s12 m6">
+                        <div className="card ">
+                          <div className="card-image">
+                            <img
+                              className="artist-image-search"
+                              src={`${artist.images[0].url}`}
+                            />
+                            <a className="popular btn-floating halfway-fab waves-effect waves-light deep-purple lighten-5">
+                              <i className="material-icons popular deep-purple lighten-1">
+                                {artist.popularity}
+                              </i>
+                            </a>
+                          </div>
+                          <div className="card-content">
+                            <ul>
+                              <li>{artist.name}</li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </a>
-              );
-            })}
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </div>
       </Template>

@@ -1,6 +1,7 @@
 const React = require("react");
 const Template = require("./Template.jsx");
 const NavComp = require("./Nav_component");
+const addCommas = require("../controllers/commas.js");
 
 class Category extends React.Component {
   render() {
@@ -24,7 +25,9 @@ class Category extends React.Component {
                 <ul>
                   <li className="goat-item">{`Goat Rank: ${goatRank}`}</li>
                   <li className="goat-item">{`Spotify Popularity: ${result[0].popularity}`}</li>
-                  <li className="goat-item">{`Spotify Followers: ${result[0].followers}`}</li>
+                  <li className="goat-item">{`Spotify Followers: ${addCommas(
+                    result[0].followers
+                  )}`}</li>
                 </ul>
               </div>
             </div>

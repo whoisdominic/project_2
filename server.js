@@ -8,12 +8,9 @@ const app = express();
 const db = mongoose.connection;
 const ranker = require("./controllers/ranker.js");
 const axios = require("axios").default;
+const session = require("express-session");
+require('dotenv').config()
 
-//////////////////////////
-// Controllers
-//////////////////////////
-
-// const searchPlayer = require('./controllers/api_controllers.js')
 
 //___________________
 //Port
@@ -43,11 +40,9 @@ db.on("open", () => {});
 // Models
 //////////////////////////
 
-const Artist = require('./models/artistSchema.js')
-const User = require('./models/userSchema.js')
-const Category = require('./models/categorySchema.js')
-
-
+const Artist = require("./models/artistSchema.js");
+const User = require("./models/userSchema.js");
+const Category = require("./models/categorySchema.js");
 
 //___________________
 //Middleware
@@ -68,6 +63,35 @@ app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
 //////////////////////////
+// Sessions
+//////////////////////////
+
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+)
+//////////////////////////
+// Controllers
+//////////////////////////
+
+const userController = require("./controllers/user_controller.js");
+app.use('/user', userController)
+
+////////////////
+//Authorization Middleware
+////////////////
+
+const authCheck = (req, res, next) => {
+  if (req.session.currentUser) {
+    return next();
+  } else {
+    res.redirect('/user/login');
+  }
+};
+//////////////////////////
 // API
 //////////////////////////
 
@@ -85,19 +109,12 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 spotifyApi.setAccessToken(
-  "BQB_U8B2TmScKVj7HVNE0f_zs_lH8bVWUVYlY15vCiScVfSUNFrcI5KHN3RStJTWKQ2iI63C5T8SyHf6qlS8zyVh_8PLVpdnYbBSFvtBxZjkpmQgemMvRqf4FC3c7PJ7yKHF04Cs24I_ZVqldKVDdve2Wmi_akj0wB402UqpqXJmklgnyODMkg"
+  "BQAhkdDrreRhYYnFPZW25f6oEQeWOhFoyBahZJGK3vPwy0U78SKu-WqGGh1_Sx0JWArXzLNBLs3Y3HD6ajzEu-5slL9eqXfaO5GFUBJzt_lkQTY5qaE6RkfzUBMyObb10VWyJMU0LAuY4-YMi2AdPtY-9AezmXm_snMvwUWXIys8A8XVMe_8tQ"
 );
 
 spotifyApi.setRefreshToken(
   "AQBQ82Hh-z_1YkvBG74mTjt-TT8GHy3reNHbX7GYyIIxkNE6LbOeDx-UzZeHCZmnAfNACrkHaBU9qad41fTcKgR0Z_mpnG6v2MZE0mORGqs8yraw4UFR_QaizXkB5Zt773Y"
 );
-
-
-
-//////////////////////////
-// Refresh area
-//////////////////////////
-
 
 //////////////////////////
 // Routes
@@ -108,23 +125,8 @@ app.get("/", (req, res) => {
 });
 
 //////////////////////////
-// User Routes
-//////////////////////////
-
-app.get('/login', (req, res) => {
-  res.render('Login')
-})
-
-
-app.get('/signup', (req, res) => {
-  res.render('Signup')
-})
-
-//////////////////////////
 // Search
 //////////////////////////
-
-
 
 app.get(`/search/:searchParam`, (req, res) => {
   spotifyApi.searchArtists(req.params.searchParam).then(
@@ -145,54 +147,49 @@ app.get("/search", (req, res) => {
   res.render("Search");
 });
 
-
 app.post("/search", (req, res) => {
   console.log(req.body);
   res.redirect(`/search/${req.body.search}`);
 });
 
-
-
-
-
-
 //////////////////////////
 // Artist Show
 //////////////////////////
-
 
 app.get("/artist/:id", (req, res) => {
   spotifyApi.getArtist(req.params.id).then(
     function (data) {
       // console.log("Artist information", data.body);
 
-
       Artist.find({
-        spotifyId: data.body.id
-      }, (err, foundArtist) => {
-        if (foundArtist.length === 1) {
-          console.log(`${foundArtist[0].name} already exists in GOAT DB`);
-          // need to add update in here
-          // find and update using the foundArtist variable
-          // push data massaged into the shema
-        } else {
-          console.log('Creating Artist in our database');
-          Artist.create({
-            name: data.body.name,
-            spotifyId: data.body.id,
-            images: data.body.images,
-            popularity: data.body.popularity,
-            genres: data.body.genres,
-            followers: data.body.followers.total
-
-          }, (err, createdArtist) => {
-            console.log(createdArtist);
-            if (err) {
-              console.log(err)
-            }
-          })
+          spotifyId: data.body.id,
+        },
+        (err, foundArtist) => {
+          if (foundArtist.length === 1) {
+            console.log(`${foundArtist[0].name} already exists in GOAT DB`);
+            // need to add update in here
+            // find and update using the foundArtist variable
+            // push data massaged into the shema
+          } else {
+            console.log("Creating Artist in our database");
+            Artist.create({
+                name: data.body.name,
+                spotifyId: data.body.id,
+                images: data.body.images,
+                popularity: data.body.popularity,
+                genres: data.body.genres,
+                followers: data.body.followers.total,
+              },
+              (err, createdArtist) => {
+                console.log(createdArtist);
+                if (err) {
+                  console.log(err);
+                }
+              }
+            );
+          }
         }
-      })
+      );
 
       spotifyApi.getArtistTopTracks(req.params.id, "GB").then(
         function (dataTracks) {
@@ -215,55 +212,57 @@ app.get("/artist/:id", (req, res) => {
   );
 });
 
-
 //////////////////////////
 // Categories
 //////////////////////////
 
-app.get('/categories/:genre', (req, res) => {
+app.get("/categories/:genre", (req, res) => {
   Category.find({
-    name: `${req.params.genre}`
-  }, (err, genre) => {
-    // console.log(genre);
-    let display = ranker(genre, 1)
-    console.log('hey', display[0]);
-    Artist.find({
-      spotifyId: display[0].id
-    }, (err, goat) => {
-      // console.log(`the goat is ${goat}`);
-      res.render('Category', {
-        goatRank: display[0].rank,
-        data: genre,
-        result: goat,
-        category: req.params.genre
-      })
-    })
-  })
-})
+      name: `${req.params.genre}`,
+    },
+    (err, genre) => {
+      // console.log(genre);
+      let display = ranker(genre, 1);
+      console.log("hey", display[0]);
+      Artist.find({
+          spotifyId: display[0].id,
+        },
+        (err, goat) => {
+          // console.log(`the goat is ${goat}`);
+          res.render("Category", {
+            goatRank: display[0].rank,
+            data: genre,
+            result: goat,
+            category: req.params.genre,
+          });
+        }
+      );
+    }
+  );
+});
 
-
-
-app.post('/categories/:genre', (req, res) => {
+app.post("/categories/:genre", authCheck, (req, res) => {
   Category.create({
-    name: req.body.name,
-    userVotes: {
-      artistId: req.body.artistId,
-      user_id: req.body.user_id
+      name: req.body.name,
+      userVotes: {
+        artistId: req.body.artistId,
+        user_id: req.body.user_id,
+      },
+    },
+    (err, createdCategory) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(`/categories/${req.params.genre}`);
+        console.log(createdCategory);
+      }
     }
-  }, (err, createdCategory) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.redirect(`/categories/${req.params.genre}`)
-      console.log(createdCategory);
-    }
-  })
-})
+  );
+});
 
-
-app.get('/categories', (req, res) => {
-  res.render('AllCategories')
-})
+app.get("/categories", (req, res) => {
+  res.render("AllCategories");
+});
 
 //___________________
 //Listener

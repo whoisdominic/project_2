@@ -1,10 +1,12 @@
 const React = require("react");
 const Template = require("./Template.jsx");
 const NavComp = require("./Nav_component");
+const addCommas = require("../controllers/commas.js");
 
 class Artist extends React.Component {
   render() {
     const { results, id, tracks } = this.props;
+
     // console.log("these are the top tracks: ", tracks);
     return (
       <Template>
@@ -14,6 +16,9 @@ class Artist extends React.Component {
             <div className="stats-cont">
               <h1>{results.name}</h1>
               <h3 className="btn light-blue lighten-1">Vote Below</h3>
+              <br />
+              <br />
+              <br />
               <ul>
                 {results.genres.map((genre, i) => {
                   return (
@@ -36,11 +41,19 @@ class Artist extends React.Component {
                   );
                 })}
                 <br />
-                <li>Popularity: {results.popularity}</li>
-                <li>Spotify Followers: {results.followers.total}</li>
+                <li className="artist-stat">
+                  Popularity: {results.popularity}
+                </li>
+                <li className="artist-stat">
+                  Spotify Followers: {addCommas(results.followers.total)}
+                </li>
               </ul>
             </div>
-            <img src={results.images[0].url} alt="" />
+            <img
+              className="artist-image-show"
+              src={results.images[0].url}
+              alt=""
+            />
           </div>
         </div>
       </Template>

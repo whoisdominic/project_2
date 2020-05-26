@@ -24,13 +24,19 @@ const NavComp = (props) => {
               <a href="/">My Votes</a>
             </li>
             <li className="deep-purple lighten-3">
-              <a href="/">Account</a>
+              <a href="/user/account">Account</a>
             </li>
             <li className="deep-purple lighten-3">
-              <a href="/login">Login</a>
+              <a href="/user/login">Login</a>
             </li>
             <li className="deep-purple lighten-3">
-              <a href="/signup">Sign up</a>
+              <a href="/user/signup">Sign up</a>
+            </li>
+
+            <li className="deep-purple lighten-3">
+              <form action="/user/?_method=delete" method="post">
+                <input type="submit" value="Logout" />
+              </form>
             </li>
           </ul>
         </div>
