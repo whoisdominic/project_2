@@ -26,9 +26,9 @@ const NavComp = (props) => {
             <li className="deep-purple lighten-3">
               <a href="/categories">Categories</a>
             </li>
-            <li className="deep-purple lighten-3">
+            {/* <li className="deep-purple lighten-3">
               <a href="/">My Votes</a>
-            </li>
+            </li> */}
             <li className="deep-purple lighten-3">
               <a href="/user/account">Account</a>
             </li>
