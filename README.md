@@ -1,5 +1,7 @@
 # Goat Ranker - Alpha
 
+![Image of  Goat Ranker Logo](https://dominiccobb.herokuapp.com/img/goat-logo-trans.png)
+
 ## About
 
 Goat ranker lets you vote on who you think is the Greatest Of All Time in different genre categories
@@ -10,7 +12,7 @@ These votes are then added and displayed on the category page. The artist with t
 
 ### Technologies used
 
-*Express
-*React-views
-*Spotify Api
-*Materialize css framework
+- Express
+- React-views
+- Spotify Api
+- Materialize css framework
