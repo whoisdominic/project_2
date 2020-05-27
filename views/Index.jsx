@@ -1,7 +1,6 @@
 const React = require("react");
 const Template = require("./Template.jsx");
 const NavComp = require("./Nav_component");
-const NavSearch = require("./Nav_search.jsx");
 
 class Index extends React.Component {
   render() {
@@ -9,7 +8,7 @@ class Index extends React.Component {
     console.log("in index", user);
     return (
       <Template>
-        <NavComp></NavComp>
+        <NavComp>{user}</NavComp>
         <div className="index-wrapper">
           <div className="main-cont index-background">
             <div className="genre-index">

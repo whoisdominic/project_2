@@ -12,6 +12,10 @@ class SearchRes extends React.Component {
         <NavComp></NavComp>
 
         <div className="main-cont">
+          <form action="/search" method="POST">
+            <input type="search" name="search" />
+            <input type="submit" value="Search" />
+          </form>
           <h1 className="results-search-title">Results for {`"${search}"`}</h1>
           <div className="center-the-cont">
             <div id="collection" class="collection">

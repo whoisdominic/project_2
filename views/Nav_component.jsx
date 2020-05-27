@@ -1,6 +1,7 @@
 const React = require("react");
 
 const NavComp = (props) => {
+  console.log("hey nav component", props);
   return (
     <>
       <nav className="nav-flex">
