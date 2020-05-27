@@ -1,23 +1,16 @@
-# Goat Ranker
+# Goat Ranker - Alpha
 
-nav dynamics:{
+## About
 
-    you could send the account info through this.props inserted into the nav component
+Goat ranker lets you vote on who you think is the Greatest Of All Time in different genre categories
 
-    then in the nav component file make a ternanry that changes what is in the nav
+You can search any artist on spotify inside of Goat Ranker and vote for that artist in any category Spotify has them listed under.
 
-}
+These votes are then added and displayed on the category page. The artist with the most votes will hold this page until another artist gets more votes.
 
-search bar {
+### Technologies used
 
-}
-
-add favicon
-
-extra:
-
-my votes {
-this should add the users votes to the votes array in their db and display the votes in a list
-}
-turn logo into css
-do the tracks
+*Express
+*React-views
+*Spotify Api
+*Materialize css framework

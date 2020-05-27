@@ -14,7 +14,9 @@ class Index extends React.Component {
             <div className="genre-index">
               <div className="index-img">
                 <h2 className="hero-index">
-                  Who's <br /> The <br /> Goat?
+                  <a className="index-link" href="/search">
+                    Who's <br /> The <br /> Goat?
+                  </a>
                 </h2>
               </div>
             </div>

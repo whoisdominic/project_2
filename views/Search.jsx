@@ -37,7 +37,7 @@ class Index extends React.Component {
               </a>
               <p>
                 <br /> Here you can search for your favorite artist just like
-                you would on spotify! <br />
+                you would on Spotify! <br />
                 <br />
                 Once you find your favorite artist. Take a look at the
                 categories and see if you think they are worthy of a greatest of
