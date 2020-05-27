@@ -225,6 +225,44 @@ span {
     color: whitesmoke
 }
 
-.search-nav {
-    width: 30%;
+.search-cont {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 4%;
+}
+
+.spotify-logo {
+    width: 8rem;
+    height: auto;
+}
+
+.search {
+    width: 70%;
+}
+
+.spotify-cont {
+    margin: -1.75%;
+    text-align: center;
+}
+
+.about {
+    font-size: 2rem;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    border-radius: 2rem;
+}
+
+.about-1 {
+    margin-right: 5%;
+}
+
+.about-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: 5%;
+    margin-top: 10%;
 }
