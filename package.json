@@ -25,6 +25,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.9.15",
     "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-views": "^1.0.4",
     "spotify-web-api-js": "^1.4.0",
     "spotify-web-api-node": "^4.0.0"
