@@ -3,7 +3,7 @@ const React = require("react");
 const NavComp = (props) => {
   return (
     <>
-      <nav>
+      <nav className="nav-flex">
         <div class="nav-wrapper white">
           <a href="/">
             <img
@@ -12,6 +12,11 @@ const NavComp = (props) => {
               alt="Goat Ranker Logo"
             />
           </a>
+          {/*           
+          <form className="search-nav" action="/search" method="POST">
+          <input type="search" name="search" />
+          <input type="submit" value="Search" />
+          </form> */}
 
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li className="active deep-purple lighten-2">
@@ -35,7 +40,11 @@ const NavComp = (props) => {
 
             <li className="deep-purple lighten-3">
               <form action="/user/?_method=delete" method="post">
-                <input type="submit" value="Logout" />
+                <input
+                  className="deep-purple lighten-3"
+                  type="submit"
+                  value="Logout"
+                />
               </form>
             </li>
           </ul>

@@ -5,12 +5,11 @@ const NavSearch = require("./Nav_search.jsx");
 
 class Index extends React.Component {
   render() {
-    const { datadata } = this.props;
+    const { user } = this.props;
+    console.log("in index", user);
     return (
       <Template>
         <NavComp></NavComp>
-        {/* <NavSearch>
-								</NavSearch> */}
         <div className="index-wrapper">
           <div className="main-cont index-background">
             <div className="genre-index">

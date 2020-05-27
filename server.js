@@ -98,43 +98,48 @@ const authCheck = (req, res, next) => {
 //////////////////////////
 // Spotify
 //////////////////////////
-
 var SpotifyWebApi = require("spotify-web-api-node");
 
-// credentials are optional
+var clientId = process.env.CLIENTID,
+  clientSecret = process.env.CLIENTSECRET;
+
+// Create the api object with the credentials
 var spotifyApi = new SpotifyWebApi({
-  clientId: "32995d0523ec4bb39a2e39d2fa56ac35",
-  clientSecret: "490e51713f024d43b9773eaf68334484",
-  redirectUri: "http://localhost:3000/callback",
+  clientId: clientId,
+  clientSecret: clientSecret
 });
 
-spotifyApi.setAccessToken(
-  "BQAgR_c4GkB0Ho6UTuLz08mgK9sCtZIcsTM_r1wmKC57WgXWrZe2dmxxb2_DyRdoi3WBYsb8eyQLvjaRWDpd69por8JmaioK60WARQxUqGZDzuEyyCy0TZ2PliWmgRJK6ItbP89qmspA8bJYMuT531TbGkpBSacbxjkiXpNZDRZymg_v4lszvQ"
-);
 
-spotifyApi.setRefreshToken(
-  "AQBQ82Hh-z_1YkvBG74mTjt-TT8GHy3reNHbX7GYyIIxkNE6LbOeDx-UzZeHCZmnAfNACrkHaBU9qad41fTcKgR0Z_mpnG6v2MZE0mORGqs8yraw4UFR_QaizXkB5Zt773Y"
-);
+const authTheApp = () => {
+
+  // Retrieve an access token.
+  spotifyApi.clientCredentialsGrant().then(
+    function (data) {
+      console.log('The access token expires in ' + data.body['expires_in']);
+      console.log('The access token is ' + data.body['access_token']);
+
+      // Save the access token so that it's used in future calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+    },
+    function (err) {
+      console.log('Something went wrong when retrieving an access token', err);
+    }
+  );
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
+authTheApp()
+setInterval(authTheApp, 1200000)
 
 //////////////////////////
 // Routes
 //////////////////////////
 
 app.get("/", (req, res) => {
-  res.render("Index");
+  res.render("Index", {
+    user: req.session.currentUser
+  });
 });
 
 //////////////////////////

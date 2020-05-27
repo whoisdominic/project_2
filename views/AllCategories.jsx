@@ -8,9 +8,29 @@ class AllCategories extends React.Component {
     return (
       <Template>
         <NavComp></NavComp>
-        <div className="main-cont">
-          <h1 className="results-search-title">Featured</h1>
-          <div className="stats-cont"></div>
+        <h1 className="results-search-title">Featured</h1>
+        <div className="categorie-cont">
+          <div className="cat-hero-cont">
+            <a className="rap-hero" href="/categories/atl%20hip%20hop">
+              <div>
+                <h3 className="btn deep-purple darken-1 cat-hero-text">
+                  Atl Hip-Hop
+                </h3>
+              </div>
+            </a>
+
+            <a className="pop-hero" href="/categories/pop">
+              <div>
+                <h3 className="btn deep-purple darken-1 cat-hero-text">Pop</h3>
+              </div>
+            </a>
+
+            <a className="rnb-hero" href="/categories/r&b">
+              <div>
+                <h3 className="btn deep-purple darken-1 cat-hero-text">R&B</h3>
+              </div>
+            </a>
+          </div>
         </div>
       </Template>
     );

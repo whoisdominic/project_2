@@ -66,6 +66,20 @@ users.post("/", (req, res) => {
     });
 });
 
+users.get('/myvotes', authCheck, (req, res) => {
+    User.findOne({
+        username: req.session.currentUser
+    }, (err, foundUser) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.render('MyVotes', {
+                currentUser: req.session.currentUser,
+                userData: foundUser
+            })
+        }
+    })
+})
 
 users.put('/account/edit/:id', (req, res) => {
     req.body.password = bcrypt.hashSync(

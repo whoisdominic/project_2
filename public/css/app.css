@@ -169,3 +169,62 @@ span {
     font-size: 3rem;
     color: rgb(39, 39, 39);
 }
+
+/* .categorie-cont {
+    display: flex;
+} */
+
+.cat-hero-cont {
+    height: 80vh;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.artist-image-cat {
+    max-height: 50vh;
+    width: auto;
+}
+
+.rap-hero {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    width: 30%;
+    background-image: url('/img/categories/gucci.jpeg');
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+}
+
+.rnb-hero {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    width: 30%;
+    background-image: url('/img/categories/usher.jpeg');
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+}
+
+.pop-hero {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+    width: 30%;
+    background-image: url('/img/categories/ariana.jpeg');
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+}
+
+.cat-hero-text {
+    color: rgb(33, 23, 36);
+    margin-top: 0.75rem;
+    background-color: rgb(129, 47, 197);
+    border-radius: 1rem;
+    color: whitesmoke
+}
+
+.search-nav {
+    width: 30%;
+}
