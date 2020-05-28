@@ -30,3 +30,17 @@ These votes are then added and displayed on the category page. The artist with t
 - NPM package for Spotify https://www.npmjs.com/package/spotify-web-api-node
 
 - CSS Framework https://materializecss.com/
+
+## Future Features
+
+- Login with spotify
+- Play music within the Goat Ranker site
+- Add music from Goat Ranker to your spotify library and playlists
+- See all votes in all categories
+- Artist Trending views
+- All categories Views
+- All nominies in each category
+
+##### Contact
+
+DominicShajaa@icloud.com
